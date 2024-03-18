@@ -1,25 +1,26 @@
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
   return (
     <header className="bg-white h-16 border-b border-gray-200">
-      <div className="flex h-full justify-between items-center">
+      <div className="flex h-full justify-between items-center text-mainTextColor">
         <div className="p-4">
           <ul className="flex space-x-10">
             <li>
-              <a href="/">プロジェクトリスト</a>
+              <Link href="/products/projects">プロジェクトリスト</Link>
             </li>
             <li>
-              <a href="/">全てのタスク</a>
+              <Link href="/">全てのタスク</Link>
             </li>
             <li>
-              <a href="/">全てのエンドポイント</a>
+              <Link href="/">全てのエンドポイント</Link>
             </li>
           </ul>
         </div>
         <div className="p-4 flex space-x-10">
-          <a href="">アカウント</a>
-          <a href="">ログアウト</a>
+          <Link href="">アカウント</Link>
+          <Link href="">ログアウト</Link>
         </div>
       </div>
     </header>

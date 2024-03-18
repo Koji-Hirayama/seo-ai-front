@@ -10,8 +10,9 @@ export const schema = Yup.object().shape({
     .email("メールアドレスの形式が不正です。"),
   password: Yup.string()
     .required("入力必須の項目です。")
-    .matches(
-      passwordRegex,
-      "※パスワードは大文字、数字を含む英数字8文字以上で設定してください"
-    ),
+    .min(8, "※パスワードは8文字以上で設定してください"),
+  // .matches(
+  //   passwordRegex,
+  //   "※パスワードは大文字、数字を含む英数字8文字以上で設定してください"
+  // ),
 });

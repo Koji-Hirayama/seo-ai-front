@@ -1,73 +1,39 @@
+import Link from "next/link";
 import React from "react";
+import { useQueryGetProjectsForUser } from "../hooks/useQueryGetProjectsForUser";
 
 const Projects = () => {
+  const { data: projectUsers, status, error } = useQueryGetProjectsForUser();
+
+  if (status === "pending") {
+    return <span>Loading...</span>;
+  }
+  if (status === "error") {
+    console.log(error);
+    return <span>Error</span>;
+  }
+
   return (
     <div>
       <div className="p-2">
-        <div className="bg-sky-500 text-white text-center font-bold rounded-lg w-[160px] h-[38px]">
-          <button className="w-full h-full text-[12px] font-black">
-            新規プロジェクト
-          </button>
-        </div>
+        <button className="btn1 text-[12px]">新規プロジェクト</button>
       </div>
       <div className="mt-10">
         <p className="px-4">プロジェクト</p>
         <ul className="flex flex-wrap mt-2">
-          <li className="max-w-[33%] h-[202px] px-4 mb-5">
-            <a
-              href="/"
-              className="bg-white w-full h-full shadow-lg rounded-lg block p-2"
+          {projectUsers.map((projectUser) => (
+            <li
+              key={projectUser.id}
+              className="min-w-[33%] h-[202px] px-4 mb-5"
             >
-              <p>プロジェクト_1</p>
-              <p className="mt-4 text-sm">
-                説明文。説明文。説明文。説明文。説明文。説明文。
-              </p>
-            </a>
-          </li>
-          <li className="max-w-[33%] h-[202px] px-4 mb-5">
-            <a
-              href="/"
-              className="bg-white w-full h-full shadow-lg rounded-lg block p-2"
-            >
-              <p>プロジェクト_1</p>
-              <p className="mt-4 text-sm">
-                説明文。説明文。説明文。説明文。説明文。説明文。
-              </p>
-            </a>
-          </li>
-          <li className="max-w-[33%] h-[202px] px-4 mb-5">
-            <a
-              href="/"
-              className="bg-white w-full h-full shadow-lg rounded-lg block p-2"
-            >
-              <p>プロジェクト_1</p>
-              <p className="mt-4 text-sm">
-                説明文。説明文。説明文。説明文。説明文。説明文。
-              </p>
-            </a>
-          </li>
-          <li className="max-w-[33%] h-[202px] px-4 mb-5">
-            <a
-              href="/"
-              className="bg-white w-full h-full shadow-lg rounded-lg block p-2"
-            >
-              <p>プロジェクト_1</p>
-              <p className="mt-4 text-sm">
-                説明文。説明文。説明文。説明文。説明文。説明文。
-              </p>
-            </a>
-          </li>
-          <li className="max-w-[33%] h-[202px] px-4 mb-5">
-            <a
-              href="/"
-              className="bg-white w-full h-full shadow-lg rounded-lg block p-2"
-            >
-              <p>プロジェクト_1</p>
-              <p className="mt-4 text-sm">
-                説明文。説明文。説明文。説明文。説明文。説明文。
-              </p>
-            </a>
-          </li>
+              <Link
+                href={`/products/projects/${projectUser.project?.id}/tasks`}
+                className="bg-white w-full h-full shadow-lg rounded-lg block p-2"
+              >
+                <p>{projectUser.project?.name}</p>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

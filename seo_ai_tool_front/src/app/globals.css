@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Change Autocomplete styles in Chrome*/
+/* Change Autocomplete styles in Chrome 自動入力系で勝手に適用してしまうスタイル解除*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -14,4 +14,10 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   box-shadow: 0 0 0px 1000px #ffffff inset;
   transition: none;
+}
+
+@layer components {
+  .btn1 {
+    @apply bg-color1-1 text-white font-medium rounded-radius1 px-8 py-2 hover:bg-color1-2;
+  }
 }
