@@ -38,7 +38,7 @@ const Overlay = ({ children, isOpen, onClose = undefined }: OverlayProps) => {
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-40 overflow-y-scroll animate-simpleFadeIn"
+      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 overflow-y-scroll animate-simpleFadeIn"
       onClick={handleOverlayClick}
     >
       {children}

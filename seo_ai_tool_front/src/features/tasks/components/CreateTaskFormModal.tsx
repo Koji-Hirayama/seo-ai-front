@@ -12,6 +12,10 @@ import { AiType } from "@/types/modelTypes";
 import { RequestCreateTask } from "../types";
 import { useMutateCreateTask } from "../hooks/useMutateCreateTask";
 import useLoadingModalStore from "@/stores/loadingModalStore";
+import useSuccessModalStore from "@/stores/successModalStore";
+import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import { useAxiosResponseError } from "@/hooks/useError";
 
 type CreateTaskFormModalProps = {
   isOpen: boolean;
@@ -26,7 +30,10 @@ const CreateTaskFormModal = ({
   project_id,
 }: CreateTaskFormModalProps) => {
   console.log("CreateTaskFormModal");
-  const { setLoadingModal, resetLoadingModal } = useLoadingModalStore();
+  const router = useRouter();
+  const { setOpenLoadingModal, resetLoadingModal } = useLoadingModalStore();
+  const { setOpenSuccessModal } = useSuccessModalStore();
+  const { setError } = useAxiosResponseError();
   const createTaskMutation = useMutateCreateTask();
   const { schema } = createTaskFormValidation(aiTypes);
   type ContactFormData = yup.InferType<typeof schema>;
@@ -41,7 +48,6 @@ const CreateTaskFormModal = ({
   });
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     //入力したデータを使って任意の処理を実装する
-    console.log(data);
     const ai_type: AiType = data.selectBox as AiType;
     const form: RequestCreateTask = {
       name: data.name,
@@ -49,15 +55,19 @@ const CreateTaskFormModal = ({
       ai_type_id: ai_type.id,
       project_id: project_id,
     };
-    console.log("AiTypeData", ai_type);
-    console.log("FormData", form);
-
-    setLoadingModal(true, "処理中です");
-
-    const res = await createTaskMutation.mutateAsync(form);
-    console.log("タスク作成完了", res);
-    resetLoadingModal();
-    close();
+    setOpenLoadingModal("処理中です");
+    await createTaskMutation
+      .mutateAsync(form)
+      .then(() => {
+        close();
+        setOpenSuccessModal("タスクを作成しました", "Continue", () => {
+          //   router.push(`/products/projects/${project_id}/tasks/??????`);
+        });
+      })
+      .catch((error: AxiosError) => {
+        setError(error, "タスクの作成に失敗しました。", "閉じる");
+      })
+      .finally(resetLoadingModal);
   };
 
   const close = () => {
@@ -70,7 +80,7 @@ const CreateTaskFormModal = ({
     <FormModal
       title="タスク作成"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={close}
       onSubmit={onSubmit}
       useFormMethods={methods}
       isCloseButton={true}
@@ -94,11 +104,7 @@ const CreateTaskFormModal = ({
         isNotRequired={true}
         placeholder="AIが〇〇を行うタスクです。"
       />
-      <FormButton
-        text="作成"
-        widthClass="min-w-[50%]"
-        isValid={methods.formState.isValid}
-      />
+      <FormButton text="作成" width="50%" isValid={methods.formState.isValid} />
     </FormModal>
   );
 };

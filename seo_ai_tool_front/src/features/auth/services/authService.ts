@@ -18,7 +18,6 @@ export const refreshToken = async (): Promise<void> => {
   try {
     await refreshTokenApi();
   } catch (error) {
-    console.error("Token refresh failed:", error);
     // TODO:　一旦ログアウトは邪魔だからコメント
     await logout();
     throw error;
@@ -32,13 +31,11 @@ export const initAuth = async (): Promise<Auth> => {
     await verifyAccessToken();
     auth.is_auth = true;
   } catch (error) {
-    console.log("=====verifyAccessToken===", error);
     try {
       // アクセストークンの検証が失敗した場合、リフレッシュトークンで試みる
       await refreshToken();
       auth.is_auth = true;
     } catch (error) {
-      console.log("=====refreshToken===", error);
       throw error;
     }
   }
@@ -50,7 +47,6 @@ const verifyAccessToken = async (): Promise<void> => {
   try {
     await verifyAccessTokenApi();
   } catch (error) {
-    console.log("Service層でのエラー", error);
     throw error;
   }
 };

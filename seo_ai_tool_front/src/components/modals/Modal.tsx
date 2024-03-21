@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Overlay from "../overlays/Overlay";
 import { IoClose } from "react-icons/io5";
+import { FadeInAnime } from "@/types";
 
 type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
-  width: "25%" | "30%" | "40%" | "50%";
+  width?: string;
   onClose?: () => void;
   isCloseButton?: boolean;
+  fadeInAnime?: FadeInAnime;
 };
 const Modal = ({
   children,
   isOpen,
-  width,
+  width = "50%",
   onClose = undefined,
   isCloseButton = false,
+  fadeInAnime = "animate-slideInBckTop",
 }: ModalProps) => {
   // モーダルコンテンツのクリックイベントが自身のレイヤー以下に伝播しないようにするハンドラー
   const handleModalContentClick = (e: React.MouseEvent) => {
@@ -23,7 +26,7 @@ const Modal = ({
 
   return (
     <Overlay isOpen={isOpen} onClose={onClose}>
-      <div className={`w-[${width}] max-h-full animate-slideInBckTop`}>
+      <div style={{ width: width }} className={`max-h-full ${fadeInAnime}`}>
         <div className="py-10">
           {isCloseButton && (
             <button
@@ -35,7 +38,7 @@ const Modal = ({
             </button>
           )}
           <div
-            className="bg-white rounded-radius1 shadow-lg px-10 py-7"
+            className="bg-white rounded-radius1 shadow-lg px-10 py-7 whitespace-pre-wrap"
             onClick={handleModalContentClick}
           >
             {children}

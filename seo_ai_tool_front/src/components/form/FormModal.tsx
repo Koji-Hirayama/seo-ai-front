@@ -10,7 +10,7 @@ type FormModalProps<TFormData extends FieldValues> = {
   isOpen: boolean;
   onClose: () => void;
   isCloseButton?: boolean;
-  width: "30%" | "40%" | "50%";
+  width?: string;
 };
 const FormModal = <TFormData extends FieldValues>({
   children,
@@ -20,7 +20,7 @@ const FormModal = <TFormData extends FieldValues>({
   isOpen,
   onClose,
   isCloseButton = false,
-  width,
+  width = "50%",
 }: FormModalProps<TFormData>) => {
   return (
     <Modal

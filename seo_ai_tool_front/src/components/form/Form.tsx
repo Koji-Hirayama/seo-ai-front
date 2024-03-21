@@ -3,26 +3,28 @@ import yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { schema } from "./validation";
 import useMutateAuth from "@/features/auth/hooks/useMutateAuth";
+import { useAuthStore } from "@/features/auth/stores/authStore";
+import { useRouter } from "next/navigation";
 
 // 1
 type ContactFormData = yup.InferType<typeof schema>;
 
 export const Form = () => {
+  const router = useRouter();
   const { createTokenMutation } = useMutateAuth();
+  const { setIsAuth } = useAuthStore();
 
-  // const { todos, addTodo } = useTodoStore();
-  // 2
   const { register, handleSubmit, formState } = useForm<ContactFormData>({
     resolver: yupResolver(schema), // Yupとの紐づけ
     mode: "onBlur", // バリデーションチェックのタイミングを設定
   });
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     //入力したデータを使って任意の処理を実装する
-    console.log(data);
     createTokenMutation
       .mutateAsync({ email: data.email, password: data.password })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        setIsAuth(true);
+        router.push("/products/projects");
       });
   };
 

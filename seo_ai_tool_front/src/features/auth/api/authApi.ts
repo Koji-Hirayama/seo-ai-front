@@ -8,7 +8,6 @@ export const createTokenApi = async (cred: CRED): Promise<Token> => {
     });
     return res.data;
   } catch (error) {
-    console.log("Api層でのエラー", error);
     throw error;
   }
 };
@@ -18,7 +17,6 @@ export const refreshTokenApi = async (): Promise<ResponseAuthDetail> => {
     const res = await baseApiClient.get<ResponseAuthDetail>(`/token_refresh/`);
     return res.data;
   } catch (error) {
-    console.log("Api層でのエラー", error);
     throw error;
   }
 };
@@ -28,7 +26,6 @@ export const verifyAccessTokenApi = async (): Promise<ResponseAuthDetail> => {
     const res = await baseApiClient.get<ResponseAuthDetail>(`/token_verify/`);
     return res.data;
   } catch (error) {
-    console.log("Api層でのエラー", error);
     throw error;
   }
 };
@@ -38,7 +35,6 @@ export const signoutApi = async (): Promise<ResponseAuthDetail> => {
     const res = await baseApiClient.get<ResponseAuthDetail>(`/logout/`);
     return res.data;
   } catch (error) {
-    console.log("Api層でのエラー", error);
     throw error;
   }
 };

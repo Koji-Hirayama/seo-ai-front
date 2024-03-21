@@ -8,9 +8,9 @@ import { useQueryGetTasksForProject } from "@/features/tasks/hooks/useQueryGetTa
 import useLoadingScreenStore from "@/stores/loadingScreenStore";
 import React, { useEffect, useState } from "react";
 
-const page = ({ params }: { params: { projectId: string } }) => {
-  const [isCreateTaskModal, setIsCreateTaskModal] = useState(false);
-  const { setLoadingScreen, resetLoadingScreen } = useLoadingScreenStore();
+const Page = ({ params }: { params: { projectId: string } }) => {
+  const [isOpenCreateTaskForm, setIsOpenCreateTaskForm] = useState(false);
+  const { setOpenLoadingScreen, resetLoadingScreen } = useLoadingScreenStore();
   const projectTasks = useQueryGetTasksForProject(Number(params.projectId));
   const aiTypes = useQueryGetAiTypes();
   const isSuccess = projectTasks.isSuccess && aiTypes.isSuccess;
@@ -18,7 +18,7 @@ const page = ({ params }: { params: { projectId: string } }) => {
   console.log("tasks");
 
   useEffect(() => {
-    isSuccess ? resetLoadingScreen() : setLoadingScreen(true, "読み込み中");
+    isSuccess ? resetLoadingScreen() : setOpenLoadingScreen("読み込み中");
     error && console.log(error);
   }, [isSuccess, error]);
 
@@ -35,21 +35,21 @@ const page = ({ params }: { params: { projectId: string } }) => {
             <button
               className="btn1 text-[12px]"
               onClick={() => {
-                setIsCreateTaskModal(true);
+                setIsOpenCreateTaskForm(true);
               }}
             >
               新規タスク
             </button>
           </div>
           <div className="mt-10">
-            <p className="px-4">プロジェクト</p>
+            <p className="px-4">タスク一覧</p>
             <TaskListMemo tasks={projectTasks.data.tasks} />
           </div>
         </div>
       </main>
       <CreateTaskFormModal
-        isOpen={isCreateTaskModal}
-        onClose={() => setIsCreateTaskModal(false)}
+        isOpen={isOpenCreateTaskForm}
+        onClose={() => setIsOpenCreateTaskForm(false)}
         aiTypes={aiTypes.data}
         project_id={projectTasks.data.id}
       />
@@ -57,4 +57,4 @@ const page = ({ params }: { params: { projectId: string } }) => {
   );
 };
 
-export default page;
+export default Page;
