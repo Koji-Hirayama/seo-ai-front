@@ -1,12 +1,12 @@
 import { apiClient } from "@/utils/axiosApiClient";
-import { ProjectTasks } from "../types";
+import { Task } from "@/types/modelTypes";
 
 export const getTasksForProjectApi = async (
   projectId: number
-): Promise<ProjectTasks> => {
+): Promise<Task[]> => {
   try {
     const res = await apiClient.get(
-      `/get_tasks_for_project?project_id=${projectId}`
+      `/${projectId}/get_tasks_for_project?project_id=${projectId}`
     );
     return res.data;
   } catch (error) {

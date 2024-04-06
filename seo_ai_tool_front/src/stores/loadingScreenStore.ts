@@ -6,7 +6,7 @@ type LoadingScreenStore = {
   loadingScreenLabel: string;
   setIsLoadingScreen: (isLoading: boolean) => void;
   setLoadingScreenLabel: (label: string) => void;
-  setOpenLoadingScreen: (label: string) => void;
+  openLoadingScreen: (label: string) => void;
   resetLoadingScreen: () => void;
 };
 
@@ -18,7 +18,7 @@ const useLoadingScreenStore = create<LoadingScreenStore>()(
     loadingScreenLabel: defaultLabel,
     setIsLoadingScreen: (isLoading) => set({ isLoadingScreen: isLoading }),
     setLoadingScreenLabel: (label) => set({ loadingScreenLabel: label }),
-    setOpenLoadingScreen: (label) =>
+    openLoadingScreen: (label) =>
       set({ isLoadingScreen: true, loadingScreenLabel: label }),
     resetLoadingScreen: () =>
       set({

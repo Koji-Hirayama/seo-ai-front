@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import React, { memo } from "react";
 import { Task } from "@/types/modelTypes";
 import TaskItem from "./TaskItem";
 

@@ -6,9 +6,13 @@ export const createTaskApi = async (
   requertCreateTask: RequestCreateTask
 ): Promise<Task> => {
   try {
-    const res = await apiClient.post<Task>(`/create_task/`, requertCreateTask, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await apiClient.post<Task>(
+      `/${requertCreateTask.project_id}/create_task/`,
+      requertCreateTask,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     return res.data;
   } catch (error) {
     throw error;

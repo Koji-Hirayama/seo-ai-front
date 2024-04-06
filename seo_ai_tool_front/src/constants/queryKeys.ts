@@ -15,6 +15,12 @@ const queryKeys = {
     //   byId: (id: number) => ["tasks", "detail", id],
     // },
   },
+  works: {
+    byTaskId: (id: number) => ["tasks", "byTaskId", id],
+    // detail: {
+    //   byId: (id: number) => ["tasks", "detail", id],
+    // },
+  },
   // その他のドメインに関するキーも同様に定義
 };
 

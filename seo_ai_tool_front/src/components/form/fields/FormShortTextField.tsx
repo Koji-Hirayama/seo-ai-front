@@ -7,6 +7,7 @@ type FormShortTextFieldProps = {
   label: string;
   placeholder?: string;
   isNotRequired?: boolean;
+  errorTitle?: string;
 };
 
 const FormShortTextField = ({
@@ -14,6 +15,7 @@ const FormShortTextField = ({
   label,
   placeholder = "",
   isNotRequired = false,
+  errorTitle = "",
 }: FormShortTextFieldProps) => {
   // useFormContextからcontrolオブジェクトを取得
   const { control } = useFormContext();
@@ -42,7 +44,9 @@ const FormShortTextField = ({
               ref={field.ref}
               value={field.value}
             />
-            {error?.message && <ErrorAlert messages={[error.message]} />}
+            {error?.message && (
+              <ErrorAlert title={errorTitle} messages={[error.message]} />
+            )}
           </>
         )}
       />

@@ -8,14 +8,13 @@ import React, { useEffect, useState } from "react";
 
 function Page() {
   const [isOpenCreateProjectForm, setIsOpenCreateProjectForm] = useState(false);
-  const { setOpenLoadingScreen, resetLoadingScreen } = useLoadingScreenStore();
-  const { data: projectUsers, isSuccess, error } = useQueryGetProjectsForUser();
+  const { openLoadingScreen, resetLoadingScreen } = useLoadingScreenStore();
+  const { data: projectUsers, isSuccess } = useQueryGetProjectsForUser();
   console.log("projects");
 
   useEffect(() => {
-    isSuccess ? resetLoadingScreen() : setOpenLoadingScreen("読み込み中");
-    error && console.log(error);
-  }, [isSuccess, error]);
+    isSuccess ? resetLoadingScreen() : openLoadingScreen("読み込み中");
+  }, [isSuccess]);
 
   if (!isSuccess) return null;
   return (

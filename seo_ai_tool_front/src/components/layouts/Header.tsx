@@ -14,6 +14,10 @@ const Header = () => {
               <Link href="/">全てのタスク</Link>
             </li>
             <li>
+              {/* 一旦project_idを1に固定 */}
+              <Link href="/products/projects/1/aitypes">AIタイプ</Link>
+            </li>
+            <li>
               <Link href="/">全てのエンドポイント</Link>
             </li>
           </ul>

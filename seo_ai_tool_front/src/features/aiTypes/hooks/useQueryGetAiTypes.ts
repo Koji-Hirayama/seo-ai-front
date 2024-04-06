@@ -1,7 +1,7 @@
 import queryKeys from "@/constants/queryKeys";
 import { AiType } from "@/types/modelTypes";
 import { useQuery } from "@tanstack/react-query";
-import { getAiTypes } from "../service/getAiTypesService";
+import { getAiTypes } from "../services/getAiTypesService";
 
 export const useQueryGetAiTypes = () => {
   return useQuery<AiType[], Error>({

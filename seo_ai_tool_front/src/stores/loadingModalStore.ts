@@ -6,7 +6,7 @@ type LoadingModalStore = {
   loadingModalLabel: string;
   setIsLoadingModal: (isLoading: boolean) => void;
   setLoadingModalLabel: (label: string) => void;
-  setOpenLoadingModal: (label: string) => void;
+  openLoadingModal: (label: string) => void;
   resetLoadingModal: () => void;
 };
 
@@ -18,7 +18,7 @@ const useLoadingModalStore = create<LoadingModalStore>()(
     loadingModalLabel: defaultLabel,
     setIsLoadingModal: (isLoading) => set({ isLoadingModal: isLoading }),
     setLoadingModalLabel: (label) => set({ loadingModalLabel: label }),
-    setOpenLoadingModal: (label) =>
+    openLoadingModal: (label) =>
       set({ isLoadingModal: true, loadingModalLabel: label }),
     resetLoadingModal: () =>
       set({

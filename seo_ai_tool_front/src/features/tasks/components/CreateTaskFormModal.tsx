@@ -31,7 +31,7 @@ const CreateTaskFormModal = ({
 }: CreateTaskFormModalProps) => {
   console.log("CreateTaskFormModal");
   const router = useRouter();
-  const { setOpenLoadingModal, resetLoadingModal } = useLoadingModalStore();
+  const { openLoadingModal, resetLoadingModal } = useLoadingModalStore();
   const { setOpenSuccessModal } = useSuccessModalStore();
   const { setError } = useAxiosResponseError();
   const createTaskMutation = useMutateCreateTask();
@@ -54,8 +54,9 @@ const CreateTaskFormModal = ({
       description: data.description,
       ai_type_id: ai_type.id,
       project_id: project_id,
+      is_save: true,
     };
-    setOpenLoadingModal("処理中です");
+    openLoadingModal("処理中です");
     await createTaskMutation
       .mutateAsync(form)
       .then(() => {

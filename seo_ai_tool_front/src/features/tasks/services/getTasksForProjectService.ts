@@ -1,9 +1,9 @@
+import { Task } from "@/types/modelTypes";
 import { getTasksForProjectApi } from "../api/getTasksForProjectApi";
-import { ProjectTasks } from "../types";
 
 export const getTasksForProject = async (
   projectId: number
-): Promise<ProjectTasks> => {
+): Promise<Task[]> => {
   try {
     const data = await getTasksForProjectApi(projectId);
     return data;

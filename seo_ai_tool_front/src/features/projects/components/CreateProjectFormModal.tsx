@@ -25,7 +25,7 @@ const CreateProjectFormModal = ({
 }: CreateProjectFormModalProps) => {
   console.log("CreateProjectFormModal");
   const router = useRouter();
-  const { setOpenLoadingModal, resetLoadingModal } = useLoadingModalStore();
+  const { openLoadingModal, resetLoadingModal } = useLoadingModalStore();
   const { setOpenSuccessModal } = useSuccessModalStore();
   const { setError } = useAxiosResponseError();
   const createProjectMutation = useMutateCreateProject();
@@ -42,7 +42,7 @@ const CreateProjectFormModal = ({
     const form: RequestCreateProject = {
       name: data.name,
     };
-    setOpenLoadingModal("処理中です");
+    openLoadingModal("処理中です");
     await createProjectMutation
       .mutateAsync(form)
       .then((res) => {
