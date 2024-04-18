@@ -35,20 +35,20 @@ const CreateTaskFormModal = ({
   const { setOpenSuccessModal } = useSuccessModalStore();
   const { setError } = useAxiosResponseError();
   const createTaskMutation = useMutateCreateTask();
-  const { schema } = createTaskFormValidation(aiTypes);
+  const { schema } = createTaskFormValidation();
   type ContactFormData = yup.InferType<typeof schema>;
   const methods = useForm<ContactFormData>({
     resolver: yupResolver(schema), // Yupとの紐づけ
-    mode: "onBlur", // バリデーションチェックのタイミングを設定
+    mode: "all", // バリデーションチェックのタイミングを設定
     defaultValues: {
       name: "",
       description: "",
-      selectBox: {},
+      aiType: undefined,
     },
   });
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     //入力したデータを使って任意の処理を実装する
-    const ai_type: AiType = data.selectBox as AiType;
+    const ai_type: AiType = data.aiType as AiType;
     const form: RequestCreateTask = {
       name: data.name,
       description: data.description,
@@ -93,7 +93,7 @@ const CreateTaskFormModal = ({
         placeholder="〇〇タスク"
       />
       <FormSelectBoxField
-        name="selectBox"
+        name="aiType"
         label="AIタイプ"
         options={aiTypes}
         optionLabelKey={"name"}

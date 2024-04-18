@@ -6,7 +6,7 @@ export const aiResponseApi = async (
 ): Promise<ResponseAi> => {
   try {
     const res = await apiClient.post<ResponseAi>(
-      `/${requestAi.project_id}/ai_response/`,
+      `/${requestAi.project_id}/ai/scraping_prompt_ai/`,
       requestAi.prompt,
       {
         headers: { "Content-Type": "application/json" },

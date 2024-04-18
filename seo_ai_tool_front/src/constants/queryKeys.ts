@@ -1,5 +1,8 @@
 // クエリキーをまとめたオブジェクト
 const queryKeys = {
+  aiModels: {
+    all: ["aiModels", "all"],
+  },
   aiTypes: {
     all: ["aiTypes", "all"],
   },

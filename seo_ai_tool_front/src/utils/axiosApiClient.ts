@@ -4,13 +4,13 @@ import axios, { AxiosError } from "axios";
 const baseApiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
-  timeout: 1000 * 30, // 1000ミリ秒 = 1秒
+  timeout: 1000 * 60, // 1000ミリ秒 = 1秒
 });
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
-  timeout: 1000 * 30, // 1000ミリ秒 = 1秒
+  timeout: 1000 * 60, // 1000ミリ秒 = 1秒
 });
 
 // インターセプターIDを保持するための変数を定義

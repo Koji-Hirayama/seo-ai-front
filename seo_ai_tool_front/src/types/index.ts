@@ -8,3 +8,17 @@ export type FadeInAnime =
   | "animate-rotateScaleUp"
   | "animate-slideBckCenter"
   | "animate-bounceInTop";
+
+export interface Error {
+  code: string;
+  error: string;
+  status: number;
+  message: string;
+  error_type: string;
+  error_details: ErrorDetail[];
+}
+
+export interface ErrorDetail {
+  field: string;
+  message: string;
+}

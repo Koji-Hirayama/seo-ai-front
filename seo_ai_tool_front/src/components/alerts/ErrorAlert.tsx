@@ -5,7 +5,7 @@ type ErrorAlertProps = {
   messages?: string[];
 };
 
-const ErrorAlert = ({ title = "Error!", messages = [] }: ErrorAlertProps) => {
+const ErrorAlert = ({ title = "", messages = [] }: ErrorAlertProps) => {
   return (
     <div
       className="px-4 py-3 border rounded-radius1 text-sm bg-red-100 border-red-400 text-red-700"

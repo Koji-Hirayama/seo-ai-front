@@ -15,7 +15,7 @@ const Form = <TFormData extends FieldValues>({
   return (
     <FormProvider {...useFormMethods}>
       <form
-        className="mt-5 grid grid-cols-1 gap-8"
+        className="grid grid-cols-1 gap-8"
         onSubmit={useFormMethods.handleSubmit(onSubmit)}
       >
         {children}

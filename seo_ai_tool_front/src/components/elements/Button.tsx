@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 type ButtonProps = {
-  color: "primary" | "failure";
   text: string;
   type: "button" | "reset" | "submit";
+  color?: "primary" | "failure";
   width?: string;
   textSize?: string;
   isValid?: boolean;
@@ -11,9 +11,9 @@ type ButtonProps = {
 };
 
 const Button = ({
-  color,
   text,
   type,
+  color = "primary",
   width = "50%",
   textSize = "14px",
   isValid = true,
