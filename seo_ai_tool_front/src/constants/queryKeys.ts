@@ -24,6 +24,9 @@ const queryKeys = {
     //   byId: (id: number) => ["tasks", "detail", id],
     // },
   },
+  aiTypeAiInputFields: {
+    byAiTypeId: (id: number) => ["aiTypeAiInputFields", "byAiTypeId", id],
+  },
   // その他のドメインに関するキーも同様に定義
 };
 

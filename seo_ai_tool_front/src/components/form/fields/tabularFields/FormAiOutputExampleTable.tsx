@@ -77,7 +77,7 @@ const FormAiOutputExampleTable = ({
     <div className="grid gap-3">
       <div className="">
         <FormShortTextField
-          name="table_description"
+          name="tableDescription"
           label="以下のテーブルの目的を教えてください。テーブルに具体的な例を入力すると精度が上がります"
         />
       </div>

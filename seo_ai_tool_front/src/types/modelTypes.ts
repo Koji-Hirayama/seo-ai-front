@@ -117,3 +117,62 @@ export interface PromptOutput {
   created_at?: string;
   updated_at?: string;
 }
+
+export interface AiInputType {
+  id: number;
+  name?: string;
+  description?: string;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface AiInputFieldType {
+  id: number;
+  name?: string;
+  description?: string;
+  context_parameters_json?: any;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface AiInputTypeAiInputFieldType {
+  id: number;
+  ai_input_type?: AiInputType;
+  ai_input_field_type?: AiInputFieldType;
+  order?: number;
+  created_at?: string;
+}
+
+export interface AiInput {
+  id: number;
+  name?: string;
+  description?: string;
+  ai_input_type?: AiInputType;
+  ai_input_fields?: AiInputField[];
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface AiInputField {
+  id: number;
+  name?: string;
+  ai_input_field_type?: AiInputFieldType;
+  ai_input?: AiInput;
+  description?: string;
+  question?: string;
+  context?: string;
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
+  deleted_at?: string;
+}
+
+export interface AiTypeAiInput {
+  ai_input?: AiInput;
+  ai_type?: AiType;
+  order?: number;
+  created_at?: string;
+}

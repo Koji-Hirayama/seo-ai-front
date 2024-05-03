@@ -38,11 +38,12 @@ export interface TableSchemas {
 
 export interface RequestPrompt {
   urls: string[];
-  input: string;
+  prompt_user_input: string;
   output_example_model_description: string;
   output_example_model: Table;
   task_id: number;
   ai_model_id: number;
+  ai_type_id: number;
 }
 
 export interface RequestAi {
@@ -99,6 +100,16 @@ export interface PromptMessage {
 export interface RequestScrapingPromptMessage {
   urls: string[];
   input: string;
+  ai_input_field_id: number;
+}
+// ==========================================
+
+// ==========================================
+// AIのインプットフィールド取得
+// ==========================================
+export interface RequestGetAiTypeAiInputFields {
+  project_id: number;
+  ai_type_id: number;
 }
 
 // ==========================================

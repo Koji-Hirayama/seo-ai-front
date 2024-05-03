@@ -1,10 +1,8 @@
 import React from "react";
 import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import FormShortTextField from "../FormShortTextField";
-import { FaTrashAlt } from "react-icons/fa";
 import { IoAddCircleSharp } from "react-icons/io5";
 import ErrorAlert from "@/components/alerts/ErrorAlert";
-import Button from "@/components/elements/Button";
 
 type FormArrayShortTextFieldProps = {
   tableSchemaName: string;
